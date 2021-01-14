@@ -1,0 +1,13 @@
+{
+  "extends": "tslint-config-shopify",
+  "rules": {
+    "no-require-imports": false,
+    "no-console": false,
+    "member-ordering": [false],
+    "trailing-comma": false,
+    "arrow-parens": false,
+    "no-var-requires": false,
+    "trailing-comma-interface": false,
+    "interface-over-type-literal": false
+  }
+}
