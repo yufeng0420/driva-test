@@ -2,7 +2,7 @@
 # Driva Engineer Tech Challenge 
 
 ## The Task
-Create a user multi step input form, this shoulb behave as a single page application (SPA) using React JS and Node JS.
+Create a user multi step input form, this should behave as a single page application (SPA) using React JS and Node JS.
 
 The screenshots can be found on the project root folder
 ![Step 01](/step1.png?raw=true "Step One")
@@ -11,20 +11,19 @@ The screenshots can be found on the project root folder
 ### Step One
 As you can see in the screenshot, the form contains the following pieces of information:
 * First name
-* First name
 * Last name
 * Mobile number
 * Email
 
 ### Step Two
-The second step will represent a bit more information about the user as fillowing:
+The second step will represent a bit more information about the user as following:
 * Relationship status - please add at least three choices
 * After tax income and frequency
 * Occupation
 * Current employer
 * Time in current employment - years and months as numbers 1-12
 * Dependats - 1-10
-This is the last step and by clicking Next, the form shoulb submit the information to the server.
+This is the last step and by clicking Next, the form should submit the information to the server.
 
 ### Navigation
 Please separate the two steps into two different routes, and provide a way to navigate back and forth.
@@ -32,10 +31,10 @@ Please separate the two steps into two different routes, and provide a way to na
 ### Backend
 Please save the user information in the quotes table.
 From the table structure, you can see that not all the fields from step1 and step2 represented directly as columns. 
-You are wellcome to add more columns, or save the rest as JSON in quote_data field.
+You are welcome to add more columns, or save the rest as JSON in quote_data field.
 
 ### Notes
-You can use any UI framework you like, or just clean CSS, this is not a UI/UX/CSS test, so better to focus on the core requirements, validation, and data. 
+You can use any UI framework you like, or just clean CSS, **this is not a UI/UX/CSS test**, so better to focus on the core requirements, validation, and data. 
 
 ## Getting Started
 We have provided a bit of boilerplate code that you can use to get started.  You are **not** required to use this boilerplate, so feel free to throw it all away and start fresh if you prefer.
@@ -57,7 +56,6 @@ You can use the following connection details:
 - User: root
 - Password: driva  
 - Database: driva
-asdf
 
 If you encounter any problems with the docker connection,
 you can do the following
