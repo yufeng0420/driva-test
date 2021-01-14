@@ -57,7 +57,7 @@ You can use the following connection details:
 - User: root
 - Password: driva  
 - Database: driva
-
+asdf
 
 If you encounter any problems with the docker connection,
 you can do the following
