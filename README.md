@@ -26,6 +26,9 @@ The second step will represent a bit more information about the user as fillowin
 * Dependats - 1-10
 This is the last step and by clicking Next, the form shoulb submit the information to the server.
 
+### Navigation
+Please separate the two steps into two different routes, and provide a way to navigate back and forth.
+
 ### Backend
 Please save the user information in the quotes table.
 From the table structure, you can see that not all the fields from step1 and step2 represented directly as columns. 
