@@ -1,0 +1,11 @@
+.return-box {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    cursor: pointer;
+}
+
+.return-text {
+    padding-left: 20px;
+}
