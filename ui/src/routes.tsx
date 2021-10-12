@@ -1,5 +1,5 @@
-import React, {useEffect, lazy, Suspense, useState, useRef} from 'react'
-import { BrowserRouter as Router, Redirect, Route, useLocation, Switch, useHistory,withRouter } from "react-router-dom";
+import React, {useState} from 'react'
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { FormData, initFormData, postForm } from './api';
 import Step1 from './page/Step1';
 import Step2 from "./page/step2"
@@ -11,8 +11,12 @@ const Routes = ()=> {
     const [isSaved, setIsSaved] = useState(false);
 
     const submit = async (data: Partial<FormData>) => {
+
         setFormData({ ...formData, ...data });
-        console.log({ ...formData, ...data })
+
+        if(!formData.firstName || !formData.email || !formData.lastName || !formData.mobile){
+            return history.push("/step1")
+        }
     
         try {
             const responds = await postForm({ ...formData, ...data });
@@ -33,6 +37,7 @@ const Routes = ()=> {
     const step1render = () => {
         return <Step1 
             next={next} 
+            data = {formData}
         />
     }
 
@@ -43,6 +48,7 @@ const Routes = ()=> {
             goBack={() => {
                 history.push('/step1')
             }}
+            data = {formData}
         />
     }
 
@@ -55,7 +61,6 @@ const Routes = ()=> {
                 />
 
                 <Route
-                    exact
                     path={"/step2"}
                     render = {step2render}
                 />

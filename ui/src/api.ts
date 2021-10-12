@@ -18,9 +18,9 @@ export type FormData = {
     payFrequency: string,
     occupation: string,
     employer: string,
-    currentEmploymentYear: string,
-    currentEmploymentMonth: string,
-    haveDepandants:string,
+    currentEmploymentYear: number,
+    currentEmploymentMonth: number,
+    haveDepandants:number,
     haveOtherIncome: boolean
 }
 
@@ -35,9 +35,9 @@ export const initFormData = {
     payFrequency: "",
     occupation: "",
     employer: "",
-    currentEmploymentYear: "",
-    currentEmploymentMonth: "",
-    haveDepandants:"",
+    currentEmploymentYear: undefined,
+    currentEmploymentMonth: undefined,
+    haveDepandants: undefined,
     haveOtherIncome: false
 }
 
@@ -50,8 +50,6 @@ export async function postForm(formData: Partial<FormData>): Promise<any>{
                 formData
             }
         });
-
-        console.log(response)
 
         return response.data;
     }

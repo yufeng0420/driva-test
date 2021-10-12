@@ -13,10 +13,11 @@ import Return from "../components/return/return"
 type Step2Props = {
     next:(data:Partial<FormData>)=>any,
     isDataSaved: boolean,
-    goBack:()=> any
+    goBack:()=> any,
+    data: Partial<FormData>
 }
 
-const Step2 = ({next, isDataSaved, goBack} : Step2Props) => {
+const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
 
     const initStep2Data = {
         relationshipStatus: "",
@@ -24,15 +25,19 @@ const Step2 = ({next, isDataSaved, goBack} : Step2Props) => {
         payFrequency: "",
         occupation: "",
         employer: "",
-        currentEmploymentYear: "",
-        currentEmploymentMonth: "",
-        haveDepandants:"",
+        currentEmploymentYear: undefined,
+        currentEmploymentMonth: undefined,
+        haveDepandants:undefined,
         haveOtherIncome: false
     } 
 
     const [step2Data, setStep2Data] = useState<Partial<FormData>>(initStep2Data)
     const [missfields, setMissfields] = useState<string[]>([])
     const [buttonDisable, setButtonDiable] = useState<boolean>(false)
+
+    useEffect(()=>{
+        setStep2Data(data)
+    },[])
 
     const validation = () => {
         let errors = [];
@@ -148,18 +153,20 @@ const Step2 = ({next, isDataSaved, goBack} : Step2Props) => {
 
         <div className = "row-container">
             <Selector 
-                handleChange={(a)=>{setStep2Data({...step2Data, currentEmploymentYear: a})}}
-                value={step2Data.currentEmploymentYear}
+                handleChange={(a)=>{setStep2Data({...step2Data, currentEmploymentYear: parseInt(a)})}}
+                value={step2Data.currentEmploymentYear?.toString()}
+                valueText = {step2Data.currentEmploymentYear === 1 ? "year" : "years"}
                 placeholder="Number of years"
-                options={["1 year", "2 years", "more than 2 years"]}
+                options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
                 optionTitle = {"Time in current employment"}
                 className = "row-item"
                 onFocus ={()=>{clearError('currentEmploymentYear')}}
                 warning = {missfields.indexOf('currentEmploymentYear') > -1 ? "warn-border": ""}
             />
             <Selector 
-                handleChange={(a)=>{setStep2Data({...step2Data, currentEmploymentMonth: a})}}
-                value={step2Data.currentEmploymentMonth}
+                handleChange={(a)=>{setStep2Data({...step2Data, currentEmploymentMonth: parseInt(a)})}}
+                value={step2Data.currentEmploymentMonth?.toString()}
+                valueText = {step2Data.currentEmploymentMonth === 1 ? "month": "months"}
                 placeholder="Number of months"
                 options={["1", "2", "3","4","5", "6", "7", "8", "9", "10", "11"]}
                 optionTitle = {""}
@@ -170,10 +177,10 @@ const Step2 = ({next, isDataSaved, goBack} : Step2Props) => {
         </div>
 
         <Selector 
-            handleChange={(a)=>{setStep2Data({...step2Data, haveDepandants: a})}}
+            handleChange={(a)=>{setStep2Data({...step2Data, haveDepandants: parseInt(a)})}}
             value={step2Data.haveDepandants}
             placeholder="Please select"
-            options={["Yes", "None"]}
+            options={["1", "2", "3","4","5", "6", "7", "8", "9", "10"]}
             optionTitle = {"Have any depandants"}
             onFocus ={()=>{clearError('haveDepandants')}}
             warning = {missfields.indexOf('haveDepandants') > -1 ? "warn-border": ""}
@@ -193,7 +200,7 @@ const Step2 = ({next, isDataSaved, goBack} : Step2Props) => {
             />
             <Button 
                 onClick = {submit}
-                text = {isDataSaved ? "Success": "Next"} 
+                text = {isDataSaved ? "Success": (buttonDisable ? "Waiting...": "Next")}
                 disable = {isDataSaved}
             />
         </div>

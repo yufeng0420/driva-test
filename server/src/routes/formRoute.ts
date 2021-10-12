@@ -36,7 +36,7 @@ const postForm = async (req: postformReq, res, next) =>{
     const haveOtherIncome = formData.haveOtherIncome ? 1 : 0
 
     // create table if not exists
-    let createSql = `CREATE TABLE IF NOT EXISTS forms (
+    let createSql = `CREATE TABLE IF NOT EXISTS customers (
             id int primary key AUTO_INCREMENT, 
             firstName VARCHAR(100) NOT NULL, 
             middleName VARCHAR(100), 
@@ -46,9 +46,9 @@ const postForm = async (req: postformReq, res, next) =>{
             payFrequency VARCHAR(100) NOT NULL, 
             occupation VARCHAR(100) NOT NULL, 
             employer VARCHAR(100) NOT NULL, 
-            currentEmploymentYear VARCHAR(100) NOT NULL, 
-            currentEmploymentMonth VARCHAR(100) NOT NULL, 
-            haveDepandants VARCHAR(100) NOT NULL, 
+            currentEmploymentYear INT NOT NULL, 
+            currentEmploymentMonth INT NOT NULL, 
+            haveDepandants INT NOT NULL, 
             relationshipStatus VARCHAR(100) NOT NULL, 
             haveOtherIncome BOOLEAN NOT NULL, 
             afterTaxIncome DOUBLE NOT NULL, 
@@ -63,7 +63,7 @@ const postForm = async (req: postformReq, res, next) =>{
 
     // Save data in table 
      let sql = `
-        INSERT INTO forms(
+        INSERT INTO customers(
             firstName,
             middleName,
             lastName,

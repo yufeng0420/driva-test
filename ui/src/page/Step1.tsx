@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as EmailValidator from 'email-validator';
 import "./step.css"
 
@@ -8,9 +8,10 @@ import { FormData } from "../api"
 
 type Step1Props = {
     next:(data: Partial<FormData> )=> void,
+    data: Partial<FormData>
 }
 
-const Step1 = ({next} : Step1Props) => {
+const Step1 = ({next, data} : Step1Props) => {
 
     const initStep1Data = {
         firstName: "",
@@ -23,6 +24,10 @@ const Step1 = ({next} : Step1Props) => {
     const [step1Data, setStep1Data] = useState<Partial<FormData>>(initStep1Data)
     const [missfields, setMissfields] = useState<string[]>([])
 
+    useEffect(()=>{
+        setStep1Data(data)
+    },[])
+    
     const validation = () => {
         let errors = [];
         if(!step1Data.firstName){
@@ -31,7 +36,6 @@ const Step1 = ({next} : Step1Props) => {
         if(!step1Data.lastName){
             errors.push("lastName")
         }
-
         if(!step1Data.mobile || (step1Data.mobile && step1Data.mobile?.length < 9)){
             errors.push("mobile")
         }

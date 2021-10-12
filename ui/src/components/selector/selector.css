@@ -59,3 +59,8 @@
 .drop-down-items:hover {
     background-color: #e0e0e0;
 }
+
+.text-container {
+    display: flex;
+    align-items: center;
+}

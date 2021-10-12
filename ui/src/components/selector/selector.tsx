@@ -10,6 +10,7 @@ type selectProps = {
     value: string | number | undefined,
     placeholder?: string,
     optionTitle?: string,
+    valueText?: string,
     arrowSvg?: any,
     warning?: string,
     onFocus?: ()=>any
@@ -25,7 +26,8 @@ export default function Selector(
         optionTitle,
         arrowSvg =  <ArrowSvg direction="down" fillColor="#678BFB"/>,
         warning = "",
-        onFocus
+        onFocus,
+        valueText = ""
     }: selectProps
 ) {
     const [showDropDown, setShowDropDown] = useState(false);
@@ -42,7 +44,7 @@ export default function Selector(
                 <input
                     type="text"
                     className={"select-input"}
-                    value={selectValue || value}
+                    value={(selectValue || value) && `${selectValue || value} ${valueText}`}
                     disabled={true}
                     placeholder = {placeholder}
                 />

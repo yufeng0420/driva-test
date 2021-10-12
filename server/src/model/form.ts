@@ -33,13 +33,13 @@ export class Form {
     @validator.MinLength(1)
     employer: string;
 
-    @validator.MinLength(1)
-    currentEmploymentYear: string;
+    @validator.IsNumber()
+    currentEmploymentYear: number;
 
-    @validator.MinLength(1)
-    currentEmploymentMonth: string;
+    @validator.IsNumber()
+    currentEmploymentMonth: number;
 
-    @validator.MinLength(1)
+    @validator.IsNumber()
     haveDepandants:string;
 
     @validator.IsBoolean()
