@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 
 const paths = {
-    postFormData: "/form/postData"
+    postFormData: "/customers/postData"
 }
 
 const root = "http://localhost:8080"

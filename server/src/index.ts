@@ -8,7 +8,7 @@ const port = 8080;
 
 server.use(cors());
 server.use(bodyParser.json());
-server.use('/form', formRouter());
+server.use('/customers', formRouter());
 
 server.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
