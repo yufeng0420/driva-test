@@ -8,10 +8,9 @@ import { FormData } from "../api"
 
 type Step1Props = {
     next:(data: Partial<FormData> )=> void,
-    display: string
 }
 
-const Step1 = ({next, display} : Step1Props) => {
+const Step1 = ({next} : Step1Props) => {
 
     const initStep1Data = {
         firstName: "",
@@ -70,7 +69,7 @@ const Step1 = ({next, display} : Step1Props) => {
         }
     }
 
-    return <div className = "container" style={{display: display}}>
+    return <div className = "container">
         <div className = "header">
             Tell us about yourself
         </div>

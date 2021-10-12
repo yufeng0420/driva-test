@@ -12,12 +12,11 @@ import Return from "../components/return/return"
 
 type Step2Props = {
     next:(data:Partial<FormData>)=>any,
-    display: string,
     isDataSaved: boolean,
     goBack:()=> any
 }
 
-const Step2 = ({next, display, isDataSaved, goBack} : Step2Props) => {
+const Step2 = ({next, isDataSaved, goBack} : Step2Props) => {
 
     const initStep2Data = {
         relationshipStatus: "",
@@ -94,7 +93,7 @@ const Step2 = ({next, display, isDataSaved, goBack} : Step2Props) => {
         }
     }
 
-    return <div className = "container" style={{display: display}}>
+    return <div className = "container">
         <div className = "header">
             A little about you
         </div>
