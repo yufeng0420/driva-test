@@ -39,7 +39,7 @@ const Step1 = ({next, data} : Step1Props) => {
         if(!step1Data.mobile || (step1Data.mobile && step1Data.mobile?.length < 9)){
             errors.push("mobile")
         }
-        if(step1Data.email && !EmailValidator.validate(step1Data.email)){
+        if(!step1Data.email || !EmailValidator.validate(step1Data.email || "")){
             errors.push("email")
         }
         setMissFields(errors)
