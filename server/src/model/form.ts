@@ -40,7 +40,7 @@ export class Form {
     currentEmploymentMonth: number;
 
     @validator.IsNumber()
-    haveDepandants:string;
+    haveDependents:string;
 
     @validator.IsBoolean()
     haveOtherIncome: boolean

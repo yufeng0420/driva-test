@@ -8,8 +8,6 @@ import Selector from "../components/selector/selector"
 import Toggle from "../components/toggle/toggle"
 import Return from "../components/return/return"
 
-
-
 type Step2Props = {
     next:(data:Partial<FormData>)=>any,
     isDataSaved: boolean,
@@ -27,17 +25,17 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
         employer: "",
         currentEmploymentYear: undefined,
         currentEmploymentMonth: undefined,
-        haveDepandants:undefined,
+        haveDependents:undefined,
         haveOtherIncome: false
     } 
 
     const [step2Data, setStep2Data] = useState<Partial<FormData>>(initStep2Data)
-    const [missfields, setMissfields] = useState<string[]>([])
-    const [buttonDisable, setButtonDiable] = useState<boolean>(false)
+    const [missFields, setMissFields] = useState<string[]>([])
+    const [buttonDisable, setButtonDisable] = useState<boolean>(false)
 
     useEffect(()=>{
         setStep2Data(data)
-    },[])
+    },[data])
 
     const validation = () => {
         let errors = [];
@@ -62,38 +60,38 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
         if(!step2Data.currentEmploymentMonth){
             errors.push("currentEmploymentMonth")
         }
-        if(!step2Data.haveDepandants){
-            errors.push("haveDepandants")
+        if(!step2Data.haveDependents){
+            errors.push("haveDependents")
         }
 
-        setMissfields(errors)
+        setMissFields(errors)
         return errors
     }
 
     const submit = () => {
         if(!validation().length){
             next(step2Data)
-            setButtonDiable(true)
+            setButtonDisable(true)
         }
     }
 
     // clear red border when focus on input
     const clearError = (error:string) => {
-        let newErrors = missfields.filter((e) => {
+        let newErrors = missFields.filter((e) => {
             return e !== error;
         });
-        setMissfields(newErrors);
+        setMissFields(newErrors);
     }
 
     const changeNumber = (a: string) => {
         if(!Number(a)){
             setStep2Data({...step2Data, afterTaxIncome: undefined})
-            const errors = missfields.slice()
+            const errors = missFields.slice()
             errors.push('afterTaxIncome')
-            setMissfields(errors)
+            setMissFields(errors)
         } else {
-            const errors = missfields.slice().filter((m)=>m!=="afterTaxIncome")
-            setMissfields(errors)
+            const errors = missFields.slice().filter((m)=>m!=="afterTaxIncome")
+            setMissFields(errors)
             setStep2Data({...step2Data, afterTaxIncome: Number(a)})
         }
     }
@@ -109,7 +107,7 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
             options={["Married", "Single"]}
             optionTitle = {"What's your relationship status"}
             onFocus ={()=>{clearError('relationshipStatus')}}
-            warning = {missfields.indexOf('relationshipStatus') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('relationshipStatus') > -1 ? "warn-border": ""}
         />
         <div className = "row-container">
             <Input 
@@ -120,7 +118,7 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
                 holdText = {"$"}
                 className = "row-item"
                 onFocus ={()=>{clearError('afterTaxIncome')}}
-                warning = {missfields.indexOf('afterTaxIncome') > -1 ? "warn-border": ""}
+                warning = {missFields.indexOf('afterTaxIncome') > -1 ? "warn-border": ""}
             />
             <Selector 
                 handleChange={(a)=>{setStep2Data({...step2Data, payFrequency: a})}}
@@ -130,7 +128,7 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
                 optionTitle = {""}
                 className = "row-last-child"
                 onFocus ={()=>{clearError('payFrequency')}}
-                warning = {missfields.indexOf('payFrequency') > -1 ? "warn-border": ""}
+                warning = {missFields.indexOf('payFrequency') > -1 ? "warn-border": ""}
             />
         </div>
        
@@ -140,7 +138,7 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
             onChange={(e)=>{setStep2Data({...step2Data, occupation: e.target.value})}}
             placeholder = {"Enter you Occupation"}
             onFocus ={()=>{clearError('occupation')}}
-            warning = {missfields.indexOf('occupation') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('occupation') > -1 ? "warn-border": ""}
         />
         <Input 
             title = {"Current Employer"}
@@ -148,7 +146,7 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
             onChange={(e)=>{setStep2Data({...step2Data, employer: e.target.value})}}
             placeholder = {"Enter your Current company's name"}
             onFocus ={()=>{clearError('employer')}}
-            warning = {missfields.indexOf('employer') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('employer') > -1 ? "warn-border": ""}
         />
 
         <div className = "row-container">
@@ -161,7 +159,7 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
                 optionTitle = {"Time in current employment"}
                 className = "row-item"
                 onFocus ={()=>{clearError('currentEmploymentYear')}}
-                warning = {missfields.indexOf('currentEmploymentYear') > -1 ? "warn-border": ""}
+                warning = {missFields.indexOf('currentEmploymentYear') > -1 ? "warn-border": ""}
             />
             <Selector 
                 handleChange={(a)=>{setStep2Data({...step2Data, currentEmploymentMonth: parseInt(a)})}}
@@ -172,18 +170,18 @@ const Step2 = ({next, isDataSaved, goBack, data} : Step2Props) => {
                 optionTitle = {""}
                 className = "row-last-child"
                 onFocus ={()=>{clearError('currentEmploymentMonth')}}
-                warning = {missfields.indexOf('currentEmploymentMonth') > -1 ? "warn-border": ""}
+                warning = {missFields.indexOf('currentEmploymentMonth') > -1 ? "warn-border": ""}
             />
         </div>
 
         <Selector 
-            handleChange={(a)=>{setStep2Data({...step2Data, haveDepandants: parseInt(a)})}}
-            value={step2Data.haveDepandants}
+            handleChange={(a)=>{setStep2Data({...step2Data, haveDependents: parseInt(a)})}}
+            value={step2Data.haveDependents}
             placeholder="Please select"
             options={["1", "2", "3","4","5", "6", "7", "8", "9", "10"]}
-            optionTitle = {"Have any depandants"}
-            onFocus ={()=>{clearError('haveDepandants')}}
-            warning = {missfields.indexOf('haveDepandants') > -1 ? "warn-border": ""}
+            optionTitle = {"Have any dependents"}
+            onFocus ={()=>{clearError('haveDependents')}}
+            warning = {missFields.indexOf('haveDependents') > -1 ? "warn-border": ""}
         />
         <Toggle 
             value={step2Data.haveOtherIncome}

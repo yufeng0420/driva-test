@@ -20,7 +20,7 @@ export type FormData = {
     employer: string,
     currentEmploymentYear: number,
     currentEmploymentMonth: number,
-    haveDepandants:number,
+    haveDependents:number,
     haveOtherIncome: boolean
 }
 
@@ -37,7 +37,7 @@ export const initFormData = {
     employer: "",
     currentEmploymentYear: undefined,
     currentEmploymentMonth: undefined,
-    haveDepandants: undefined,
+    haveDependents: undefined,
     haveOtherIncome: false
 }
 

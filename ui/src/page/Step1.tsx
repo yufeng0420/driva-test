@@ -22,11 +22,11 @@ const Step1 = ({next, data} : Step1Props) => {
     }
 
     const [step1Data, setStep1Data] = useState<Partial<FormData>>(initStep1Data)
-    const [missfields, setMissfields] = useState<string[]>([])
+    const [missFields, setMissFields] = useState<string[]>([])
 
     useEffect(()=>{
         setStep1Data(data)
-    },[])
+    },[data])
     
     const validation = () => {
         let errors = [];
@@ -42,7 +42,7 @@ const Step1 = ({next, data} : Step1Props) => {
         if(step1Data.email && !EmailValidator.validate(step1Data.email)){
             errors.push("email")
         }
-        setMissfields(errors)
+        setMissFields(errors)
         return errors
     }
 
@@ -54,21 +54,21 @@ const Step1 = ({next, data} : Step1Props) => {
 
     // clear red border when focus on input
     const clearError = (error:string) => {
-        let newErrors = missfields.filter((e) => {
+        let newErrors = missFields.filter((e) => {
             return e !== error;
         });
-        setMissfields(newErrors);
+        setMissFields(newErrors);
     }
 
     const changeNumber = (a: string) => {
         if(!Number(a)){
             setStep1Data({...step1Data, mobile: a})
-            const errors = missfields.slice()
+            const errors = missFields.slice()
             errors.push('mobile')
-            setMissfields(errors)
+            setMissFields(errors)
         } else {
-            const errors = missfields.slice().filter((m)=>m!=="mobile")
-            setMissfields(errors)
+            const errors = missFields.slice().filter((m)=>m!=="mobile")
+            setMissFields(errors)
             setStep1Data({...step1Data, mobile: a})
         }
     }
@@ -83,7 +83,7 @@ const Step1 = ({next, data} : Step1Props) => {
             onFocus ={()=>{clearError('firstName')}}
             onChange={(e)=>{setStep1Data({...step1Data, firstName: e.target.value})}}
             placeholder = {"As it appears on your license"}
-            warning = {missfields.indexOf('firstName') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('firstName') > -1 ? "warn-border": ""}
         />
         <Input 
             title = {"Middle Name"}
@@ -98,7 +98,7 @@ const Step1 = ({next, data} : Step1Props) => {
             onFocus ={()=>{clearError('lastName')}}
             onChange={(e)=>{setStep1Data({...step1Data, lastName: e.target.value})}}
             placeholder = {"As it appears on your license"}
-            warning = {missfields.indexOf('lastName') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('lastName') > -1 ? "warn-border": ""}
         />
         <Input 
             title = {"Mobile number"}
@@ -107,7 +107,7 @@ const Step1 = ({next, data} : Step1Props) => {
             onChange={(e)=>{changeNumber(e.target.value)}}
             placeholder = {""}
             holdText = {"+61"}
-            warning = {missfields.indexOf('mobile') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('mobile') > -1 ? "warn-border": ""}
         />
         <Input 
             title = {"Email"}
@@ -115,7 +115,7 @@ const Step1 = ({next, data} : Step1Props) => {
             onFocus ={()=>{clearError('email')}}
             onChange={(e)=>{setStep1Data({...step1Data, email: e.target.value})}}
             placeholder = {"Please enter a valid email"}
-            warning = {missfields.indexOf('email') > -1 ? "warn-border": ""}
+            warning = {missFields.indexOf('email') > -1 ? "warn-border": ""}
         />
         <Button 
             onClick = {submit}
